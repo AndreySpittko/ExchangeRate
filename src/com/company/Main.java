@@ -18,7 +18,7 @@ public class Main {
     }
 
     private static String getLatesExchangeRates() throws Exception {
-        String url = https://exchangeratesapi.io/api/latest;
+        String url = "https://exchangeratesapi.io/api/latest";
 
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
