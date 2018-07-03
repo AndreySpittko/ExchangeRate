@@ -14,6 +14,13 @@ import java.security.cert.X509Certificate;
 public class Main {
 
     public static void main(String[] args) {
+        disableSSL();
+        try {
+            String response = getLatesExchangeRates();
+            System.out.println(response);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         // write your code here
     }
 
