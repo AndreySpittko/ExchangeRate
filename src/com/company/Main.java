@@ -4,9 +4,7 @@ import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.security.cert.X509Certificate;
@@ -17,7 +15,36 @@ public class Main {
         disableSSL();
         try {
             String response = getLatesExchangeRates();
+            if (response == null) {
+                return;
+            }
+
+
+//            int c = 0;
+//            char at = response.charAt(c);
+//            System.out.println(at);
+
+            for(int i = 0; i < response.length(); i++) {
+                char c = response.charAt(i);
+
+                System.out.print(c);
+                if(c == '{'){
+                    System.out.println("\t");
+                }
+                if(c ==':{'){
+
+                }
+                if(c == ',') {
+                    System.out.print("\n\t");
+                }
+                if(c == '}') {
+                    System.out.println();
+                }
+
+            }
+
             System.out.println(response);
+            writeToFile(response);          //
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,5 +97,43 @@ public class Main {
             e.printStackTrace();
         }
     }
+
+    private static String readFromFile() {
+        try {
+            try (FileReader reader = new FileReader("test.txt")) {
+                int c;
+                while ((c = reader.read()) != -1) {
+                    System.out.println((char) c);
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    private static void writeToFile(String textToWrite) {
+//        String textToWrite = "Angey";
+//        try(FileOutputStream fos = new FileOutputStream("test.txt");
+//            BufferedOutputStream out = new BufferedOutputStream(fos)) {
+            byte[] bytes = textToWrite.getBytes();
+        try(FileWriter writer = new FileWriter("test.txt")) {
+
+            writer.write(textToWrite);
+            writer.append("\n");
+            writer.write(textToWrite);
+
+//            out.write(bytes);
+            writer.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void writeToConsole(String text) {}
 
 }
