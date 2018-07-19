@@ -31,8 +31,8 @@ public class Main {
                 if(c == '{'){
                     System.out.println("\t");
                 }
-                if(c ==':{'){
-
+                if(c == ':{'){
+                    sou
                 }
                 if(c == ',') {
                     System.out.print("\n\t");
